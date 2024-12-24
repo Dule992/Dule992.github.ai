@@ -12,13 +12,13 @@ form.addEventListener('submit', (e) => {
   const formData = new FormData(form);
   const params = new URLSearchParams(formData);
 
-  fetch('http://localhost:3000/submit', {
+  fetch('https://api.web3forms.com/submit', {
     method: 'POST',
     body: params,
   })
   .then(response => response.json())
   .then(data => {
-    if (data.success) {
+    if (data.captchaSuccess) {
       alert('Form submitted successfully');
     } else {  
       alert('Captcha failed');
