@@ -1,0 +1,36 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Dependency directories
+form-server/node_modules/
+
+# Build directories
+dist/
+build/
+
+# IDE files
+.vscode/
+.idea/
+.env
+
+# System files
+.DS_Store
+Thumbs.db
+
+# GitHub Actions
+.github/workflows/*.log
+
+# Temporary files
+*.tmp
+*.swp
+*.bak
+*.backup
+*.orig
+*.save
