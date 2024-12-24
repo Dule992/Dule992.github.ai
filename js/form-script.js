@@ -1,30 +1,43 @@
-const form = document.querySelector('form');
+const form = document.getElementById("contactForm");
+const result = document.getElementById("result");
 
-form.addEventListener('submit', (e) => {
+form.addEventListener("submit", function (e) {
   e.preventDefault();
-
-  const captchaResponse = grecaptcha.getResponse();
-
-  if (!captchaResponse.length > 0) {
-    alert('Please complete the captcha');
-    throw new Error('Captcha is required');
-  }
+  
   const formData = new FormData(form);
-  const params = new URLSearchParams(formData);
+  const object = Object.fromEntries(formData);
+  const json = JSON.stringify(object);
+  result.innerHTML = "Please wait...";
 
-  fetch('https://api.web3forms.com/submit', {
-    method: 'POST',
-    body: params,
+  fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: json
   })
-  .then(response => response.json())
-  .then(data => {
-    if (data.captchaSuccess) {
-      alert('Form submitted successfully');
-    } else {  
-      alert('Captcha failed');
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
+    .then(async (response) => {
+      let json = await response.json();
+      if (response.status == 200) {
+        result.innerHTML = json.message;
+        result.classList.remove("text-gray-500");
+        result.classList.add("text-green-500");
+      } else {
+        console.log(response);
+        result.innerHTML = json.message;
+        result.classList.remove("text-gray-500");
+        result.classList.add("text-red-500");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      result.innerHTML = "Something went wrong!";
+    })
+    .then(function () {
+      form.reset();
+      setTimeout(() => {
+        result.style.display = "none";
+      }, 5000);
+    });
 });
