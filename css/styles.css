@@ -598,8 +598,12 @@ progress {
 }
 
 .img-fluid {
-  max-width: 100%;
-  height: auto;
+  float: left;
+  width:  300px;
+  height: 300px;
+  margin-right: 1rem;
+  border-style: 1px solid var(--bs-yellow) ;
+  object-fit:contain;
 }
 
 .img-thumbnail {
