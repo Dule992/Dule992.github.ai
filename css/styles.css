@@ -1964,6 +1964,11 @@ progress {
     -webkit-overflow-scrolling: touch;
   }
 }
+@media (max-width: 768px) {
+  .responsive-image {
+    display: none;
+  }
+}
 .form-label {
   margin-bottom: 0.5rem;
 }
